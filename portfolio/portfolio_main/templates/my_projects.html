@@ -2,58 +2,101 @@
 {% load static %}
 
 {% block sidebar %}
-<div class="sticky-top" id="sticky-sidebar">
-<p>
-    <a class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSideBar"
-       aria-expanded="true" aria-controls="collapseSideBar">
-        <img class="bi" width="24" height="24" role="img" aria-label="Home"
-             src="{% static 'bootstrap-icons-1.8.1/list.svg' %}" alt="">
-    </a>
-</p>
-<div class="w-auto">
-    <div class=" collapse show collapse-horizontal" id="collapseSideBar">
-        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 200px;">
-            <a href="/"
-               class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                <svg class="bi me-2" width="40" height="32">
-                    <use xlink:href="#bootstrap"></use>
-                </svg>
-                <span class="fs-4">Navigation</span>
-            </a>
-            <hr>
-            {% for technology in technologies %}
-                <ul class="list-unstyled ps-0">
-                    <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse"
-                                data-bs-target="#{{ technology.name }}" aria-expanded="true" type="button">
-                            <img src="{% static 'bootstrap-icons-1.8.1/chevron-down.svg' %}" alt="SomeAlternateText">
-                            {{ technology.name }}
-                        </button>
-                        <div class="collapse show" id="{{ technology.name }}" style="">
-                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                               {% for project in projects %}
-                                    {% if project.technology == technology %}
-                                        <li><a href="#{{ project.name }}" class="link-dark rounded">{{ project.name }}</a></li>
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            {% endfor %}
-        </div>
+<div class="sidebar" style="left: 0px;">
+    <div class="d-flex flex-column flex-shrink-0 p-3 bg-light sidebar-content" style="width: 200px;">
+        <a href="/"
+           class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32">
+                <use xlink:href="#bootstrap"></use>
+            </svg>
+            <span class="fs-4">Navigation</span>
+        </a>
+        <hr>
+        {% for technology in technologies %}
+        <ul class="list-unstyled ps-0">
+            <li class="mb-1">
+                <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse"
+                        data-bs-target="#{{ technology.name }}" aria-expanded="true" type="button">
+                    <img src="{% static 'bootstrap-icons-1.8.1/chevron-down.svg' %}" alt="SomeAlternateText">
+                    {{ technology.name }}
+                </button>
+                <div class="collapse show" id="{{ technology.name }}" style="">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        {% for project in projects %}
+                        {% if project.technology == technology %}
+                        <li><a href="#{{ project.name }}" class="link-dark rounded">{{ project.name }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        {% endfor %}
     </div>
-</div>
+    <div class="dragholder">
+
+    </div>
 </div>
 {% endblock sidebar %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/my_projects.css' %}" type="text/css">
+
+<div class="main-content">
     {% for project in projects %}
-    <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8">
+    <div class="col-12">
+
         <h1 id="{{project.name}}">{{ project.name }}</h1>
         <p class="text-justify">{{ project.description }}</p>
-        </div>
     </div>
+    <div>
+        <ul class="ulist">
+            {% for image in images%}
+            {% if image.project == project %}
+            <li class="list_item">
+                <a class="btn"
+                   data-toggle="modal"
+                   data-target="#{{ image.photo }}">
+                    <img class="small_image" src="{{ image.get_path }}" width="64px" height="64px">
+                </a>
+                <div class="modal fade"
+                     id="{{ image.photo }}"
+                     tabindex="-1"
+                     role="dialog"
+                     aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="container-fluid container-slider">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <img class="window_image" id="image" src="{{ image.get_path }}"
+                                                 alt="Click on button"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button"
+                                        class="btn btn-secondary"
+                                        data-dismiss="modal">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+
+    </div>
+
+
     {% endfor %}
+</div>
+<script src="{% static 'js/my_projects.js' %}"></script>
 {% endblock content %}

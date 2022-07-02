@@ -1,0 +1,69 @@
+.ulist {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.list_item {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+
+  text-decoration: none;
+  margin: 4px;
+}
+
+.window_image {
+  height: 100%;
+  width: 100%;
+}
+
+.small_image {
+  height: 128px;
+  width: 128px
+}
+
+#sticky-sidebar {
+  top: 0;
+  left: 0;
+  /* top layer */
+  z-index: 9999;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+}
+
+.sidebar {
+  position: fixed;
+
+  z-index: 1000;
+}
+
+.main-content {
+  padding-left: 10px;
+}
+
+@media screen and (max-width: 425px) {
+  .dragholder {
+    position: absolute;
+    height: 100px;
+    width: 10px;
+    background: black;
+    right: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 80px;
+  }
+
+  .dragholder:hover {
+    cursor: move;
+  }
+}

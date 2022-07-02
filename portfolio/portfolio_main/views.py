@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Project, MainTechnology
+from .models import Project, MainTechnology, Photo
 
 
 def index(request):
@@ -9,10 +9,12 @@ def index(request):
 def my_projects(request):
     projects = Project.objects.all()
     technology = MainTechnology.objects.all()
+    images = Photo.objects.all()
     print(projects[0].technology.id)
     print(technology[1].id)
     return render(request, 'my_projects.html', context={"projects": projects,
-                                                        "technologies": technology})
+                                                        "technologies": technology,
+                                                        "images": images})
 
 
 def my_skills(request):
@@ -20,4 +22,7 @@ def my_skills(request):
 
 
 def test(request):
-    return render(request, 'test.html')
+    projects = Project.objects.all()
+    technology = MainTechnology.objects.all()
+    return render(request, 'test.html', context={"technologies": technology,
+                                                 "projects": projects})
