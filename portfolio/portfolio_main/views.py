@@ -1,5 +1,15 @@
 from django.shortcuts import render
 from .models import Project, MainTechnology, Photo
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.views import APIView
+from .models import Skill, SkillIcon
+from .serializers import SkillSerializer
+
+
+class SkillViewSet(ModelViewSet):
+    queryset = Skill.objects.all()
+    serializer_class = SkillSerializer
 
 
 def index(request):

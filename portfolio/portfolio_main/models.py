@@ -1,11 +1,26 @@
 from django.db import models
 from PIL import Image
+from django.core.validators import MaxValueValidator, MinValueValidator
+
+
+class SkillIcon(models.Model):
+    photo = models.FileField(upload_to='skills_icons/')
+
+    def get_path(self):
+        return f"media/{self.photo}"
+
+    def __str__(self):
+        return str(self.photo).split('/')[1]
 
 
 class Skill(models.Model):
     name = models.CharField(max_length=200, verbose_name="Skill name")
-    level = models.IntegerField(verbose_name="Skill level")
-    description = models.TextField(max_length=1000, verbose_name="Skill description")
+    level = models.IntegerField(verbose_name="Skill level", validators=[
+        MinValueValidator(0),
+        MaxValueValidator(100)
+    ])
+    description = models.TextField(max_length=1000, verbose_name="Skill description", null=True, blank=True)
+    icon = models.ForeignKey(SkillIcon, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -38,7 +53,6 @@ class Photo(models.Model):
 
     def get_path(self):
         return f"media/{self.photo}"
-
 
 
 class MainTechnology(models.Model):
