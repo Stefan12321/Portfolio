@@ -1,3 +1,16 @@
-.col-4{
+.col-card{
     padding-top: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    display: flex;
+    /* opacity: 100%; */
+}
+svg{
+    display: block;
+    margin: auto;
+
+}
+
+.line-drawing{
+    padding-top: 20px;
 }
