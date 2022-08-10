@@ -1,14 +1,10 @@
-{% extends 'base_generic.html' %}
+{% extends 'base_fields.html' %}
 {% load static %}
 
 {% block sidebar %}
-<div class="sidebar" style="left: 0px;">
-    <div class="d-flex flex-column flex-shrink-0 p-3 bg-light sidebar-content" style="width: 200px;">
-        <a href="/"
-           class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-            <svg class="bi me-2" width="40" height="32">
-                <use xlink:href="#bootstrap"></use>
-            </svg>
+<div class="sidebar">
+    <div class="d-flex flex-column flex-shrink-0 p-3 bg-light sidebar-content" style="width: 200px; text-align: center;">
+        <a href="#navbar" class="link-dark">
             <span class="fs-4">Navigation</span>
         </a>
         <hr>
@@ -38,65 +34,10 @@
     </div>
 </div>
 {% endblock sidebar %}
-{% block content %}
+{% block fields_content %}
 <link rel="stylesheet" href="{% static 'css/my_projects.css' %}" type="text/css">
 
 <div class="main-content">
-    {% for project in projects %}
-    <div class="col-12">
-
-        <h1 id="{{project.name}}">{{ project.name }}</h1>
-        <p class="text-justify">{{ project.description }}</p>
-    </div>
-    <div>
-        <ul class="ulist">
-            {% for image in images%}
-            {% if image.project == project %}
-            <li class="list_item">
-                <a class="btn"
-                   data-toggle="modal"
-                   data-target="#{{ image.photo }}">
-                    <img class="small_image" src="{{ image.get_path }}" width="64px" height="64px">
-                </a>
-                <div class="modal fade"
-                     id="{{ image.photo }}"
-                     tabindex="-1"
-                     role="dialog"
-                     aria-labelledby="exampleModalLabel"
-                     aria-hidden="true">
-
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <div class="container-fluid container-slider">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <img class="window_image" id="image" src="{{ image.get_path }}"
-                                                 alt="Click on button"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="modal-footer">
-                                <button type="button"
-                                        class="btn btn-secondary"
-                                        data-dismiss="modal">
-                                    Close
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            {% endif %}
-            {% endfor %}
-        </ul>
-
-    </div>
-
-
-    {% endfor %}
 </div>
 <script src="{% static 'js/my_projects.js' %}"></script>
-{% endblock content %}
+{% endblock fields_content %}

@@ -4,12 +4,17 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
 from .models import Skill, SkillIcon
-from .serializers import SkillSerializer
+from .serializers import SkillSerializer, ProjectsSerializer
 
 
 class SkillViewSet(ModelViewSet):
     queryset = Skill.objects.all()
     serializer_class = SkillSerializer
+
+
+class ProjectsViewSet(ModelViewSet):
+    queryset = Project.objects.all()
+    serializer_class = ProjectsSerializer
 
 
 def index(request):

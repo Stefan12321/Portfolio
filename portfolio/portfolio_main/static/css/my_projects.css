@@ -4,6 +4,10 @@
   padding: 0;
   overflow: hidden;
 }
+a{
+
+  text-decoration: none;
+}
 
 .list_item {
   float: left;
@@ -27,7 +31,7 @@
 
 #sticky-sidebar {
   top: 0;
-  left: 0;
+  /* left: 0; */
   /* top layer */
   z-index: 9999;
 }
@@ -43,7 +47,7 @@ body {
 
 .sidebar {
   position: fixed;
-
+  left: -200px;
   z-index: 1000;
 }
 

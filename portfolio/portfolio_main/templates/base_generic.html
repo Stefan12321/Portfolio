@@ -49,7 +49,7 @@
 {% block nawbar %}
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">Navbar</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -77,26 +77,15 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2 col-0">
-            {% block sidebar %}
-            {% endblock sidebar %}
-        </div>
-        <div class="col-md-8 col-12">
-
-            {% block content %}{% endblock content %}
-
-
-            {% block footer %}
-            {% block copyright %}
-            <p class="mt-5 mb-3 text-muted d-flex justify-content-center">Copyright OOO "People and files", 2022. All
-                rights reserved</p>
-            {% endblock copyright %}
-            {% endblock footer %}
-        </div>
-        <div class="col-md-2 col-0"></div>
-
+        {% block content %}{% endblock content %}
     </div>
 </div>
+{% block footer %}
+    {% block copyright %}
+    <p class="mt-5 mb-3 text-muted d-flex justify-content-center">Copyright OOO "People and files", 2022. All
+        rights reserved</p>
+    {% endblock copyright %}
+    {% endblock footer %}
 
 </body>
 {% endblock body %}
